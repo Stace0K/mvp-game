@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zona Incognita - MVP</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 01-login screen -->
+    <section id="01-login" class="screen active">
+        <img src="design/01-login.png" alt="Login screen" class="bg">
+        <button class="hotspot" data-action="highlight" style="left: 8.33%; top: 21.32%; width: 13.89%; height: 5.59%;">Новая игра</button>
+        <button class="hotspot" data-action="navigate" data-screen="03-task1" style="left: 8.33%; top: 31.28%; width: 13.89%; height: 5.59%;">Продолжить</button>
+        <button class="hotspot" data-action="navigate" data-screen="02-settings" style="left: 8.33%; top: 41.22%; width: 13.89%; height: 5.59%;">Настройки</button>
+        <button class="hotspot" data-action="highlight" style="left: 8.33%; top: 51.16%; width: 13.89%; height: 5.59%;">Помощь</button>
+        <button class="hotspot" data-action="highlight" style="left: 8.33%; top: 61.10%; width: 13.89%; height: 5.59%;">Об игре</button>
+        <button class="hotspot" data-action="highlight" style="left: 8.33%; top: 71.03%; width: 13.89%; height: 5.59%;">Выход</button>
+        <button class="hotspot" data-action="highlight" style="left: 92.71%; top: 63.35%; width: 5.56%; height: 9.94%;"></button>
+        <button class="hotspot" data-action="highlight" style="left: 92.71%; top: 76.09%; width: 5.56%; height: 9.94%;"></button>
+        <button class="hotspot" data-action="highlight" style="left: 92.71%; top: 88.82%; width: 5.56%; height: 9.94%;"></button>
+    </section>
+
+    <!-- 02-settings screen -->
+    <section id="02-settings" class="screen">
+        <img src="design/02-settings.png" alt="Settings screen" class="bg">
+
+        <!-- Ползунки -->
+        <input type="range" class="slider" id="slider1" min="0" max="100" value="68" step="1" style="left: 43.58%; top: calc(23.48% - 11px); width: 27.95%;">
+        <input type="range" class="slider" id="slider2" min="0" max="100" value="83" step="1" style="left: 43.58%; top: calc(28.29% - 11px); width: 27.95%;">
+        <input type="range" class="slider" id="slider3" min="0" max="100" value="46" step="1" style="left: 43.58%; top: calc(32.96% - 11px); width: 27.95%;">
+        <input type="range" class="slider" id="slider4" min="0" max="100" value="27" step="1" style="left: 43.58%; top: calc(46.92% - 11px); width: 27.95%;">
+
+        <!-- Выпадающие списки -->
+        <div class="dropdown" id="dropdown1" style="left: 43.58%; top: 55.71%; width: 22.22%; height: 4.64%;">
+            <span class="dropdown-value" id="dropdown1-value">Средний</span>
+            <button class="dropdown-arrow" aria-label="Открыть список" style="left: 39%; width: 12.5%;"></button>
+            <ul class="dropdown-menu">
+                <li data-value="Низкий">Низкий</li>
+                <li data-value="Средний">Средний</li>
+                <li data-value="Высокий">Высокий</li>
+            </ul>
+        </div>
+
+        <div class="dropdown" id="dropdown2" style="left: 43.58%; top: 60.36%; width: 22.22%; height: 4.64%;">
+            <span class="dropdown-value" id="dropdown2-value">По умолчанию</span>
+            <button class="dropdown-arrow" aria-label="Открыть список" style="left: 62.5%; width: 12.5%;"></button>
+            <ul class="dropdown-menu">
+                <li data-value="Высокая">Высокая</li>
+                <li data-value="По умолчанию">По умолчанию</li>
+            </ul>
+        </div>
+
+        <!-- Кнопки выбора размера текста -->
+        <button class="hotspot size-btn" data-size="s" style="left: 43.06%; top: 38.08%; width: 3%; height: 7%;">S</button>
+        <button class="hotspot size-btn" data-size="m" style="left: 46.2%; top: 37.77%; width: 3.3%; height: 8%;">M</button>
+        <button class="hotspot size-btn" data-size="l" style="left: 49.31%; top: 37.46%; width: 3.5%; height: 8%;">L</button>
+        <button class="hotspot size-btn" data-size="xl" style="left: 51.91%; top: 37.15%; width: 4%; height: 8%;">XL</button>
+
+        <!-- Кнопки выхода -->
+        <button class="hotspot" data-action="navigate" data-screen="01-login" data-save="true" style="left: 8.75%; top: 76.39%; width: 19.44%; height: 4.64%;">Сохранить и выйти</button>
+        <button class="hotspot" data-action="navigate" data-screen="01-login" data-save="false" style="left: 8.75%; top: 81.04%; width: 19.44%; height: 4.64%;">Выйти</button>
+    </section>
+
+    <!-- 03-task1 screen -->
+    <section id="03-task1" class="screen">
+        <img src="design/03-task1-empty.png" alt="Task 1 screen" class="bg">
+
+        <!-- Плашка с заданием -->
+        <div class="task-text " style="left: 34.72%; top: calc(2.17% + var(--scale) * 22px); width: 38.89%; height: 6.19%;">
+            <p class="task-description ">Найдите способ пересечь реку</p>
+        </div>
+
+        <button class="hotspot" data-action="highlight" style="left: 0%; top: 3.09%; width: 5.56%; height: 9.76%;">Инвентарь</button>
+        <button class="hotspot" data-action="navigate" data-screen="01-login" style="left: 0.69%; top: 16.05%; width: 4.17%; height: 7.41%;">Меню</button>
+        <button class="hotspot item" data-action="collect" data-item="1" style="left: 2.78%; top: 64.81%; width: 13.89%; height: 7.50%;">Предмет 1</button>
+        <button class="hotspot item" data-action="collect" data-item="2" style="left: 43.58%; top: 58.15%; width: 7.23%; height: 12.86%;">Предмет 2</button>
+        <button class="hotspot" data-action="hint" data-hint="1" style="left: 95.97%; top: 2.53%; width: 2.78%; height: 4.94%;">Подсказка</button>
+
+        <!-- Плашка с сюжетом -->
+        <div class="story-text " style="left: 0%; top: 87.31%; width: 100%; height: 12.69%;">
+            <p class="story-content ">Сквозь лазурную рябь реки я разглядываю каменистое дно. Кажется, не так уж глубоко, но лучше держаться покрепче.</p>
+        </div>
+
+        <!-- Окно подсказки -->
+        <div class="hint-popup" id="hint-popup-1">
+            <div class="hint-popup-content">В инвентаре можно соединить предметы</div>
+        </div>
+    </section>
+
+    <!-- 04-task2 screen -->
+    <section id="04-task2" class="screen">
+        <img src="design/04-task2-empty.png" alt="Task 2 screen" class="bg">
+
+        <!-- Плашка с сюжетом -->
+        <div class="story-text " style="left: 0%; top: 48.17%; width: 100%; height: 28.53%;">
+            <p class="story-content ">Вечереет. День сегодня жаркий, но я уже чувствую первое дыхание горной прохлады.<br>После преодоления тропы мне хочется только одного — забыться мёртвым сном и оставить в нём свою усталость.<br>Я вижу на верхушке смотровой башни свет. Кто там живёт? Могу ли я доверить этому кому-то свою жизнь?..</p>
+        </div>
+
+        <!-- Плашки-ответы -->
+        <div class="answer-text " data-action="navigate" data-screen="01-login" style="left: 11.11%; top: 78.24%; width: 19.44%; height: 17.79%;">
+            <p class="answer-content ">Направиться к башне: не всё ли мне равно?</p>
+        </div>
+
+        <div class="answer-text " data-action="navigate" data-screen="01-login" style="left: 38.89%; top: 78.24%; width: 19.44%; height: 17.79%;">
+            <p class="answer-content ">Заночевать на месте в старом спальном мешке</p>
+        </div>
+
+        <div class="answer-text " data-action="navigate" data-screen="01-login" style="left: 66.67%; top: 78.24%; width: 19.44%; height: 17.79%;">
+            <p class="answer-content ">Обойти башню: вдруг недалеко деревня?</p>
+        </div>
+
+        <!-- Окно подсказки -->
+        <div class="hint-popup" id="hint-04">
+            <div class="hint-popup-content">Подумай</div>
+        </div>
+
+        <button class="hotspot" data-action="hint" data-hint="2" style="left: 95.97%; top: 2.53%; width: 2.78%; height: 4.91%;">Подсказка</button>
+    </section>
+    
+<!-- Элемент для затемнения при переходах -->
+<div id="screen-fade" class="screen-fade"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

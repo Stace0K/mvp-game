@@ -1,0 +1,379 @@
+/* =======================================================
+   БАЗОВЫЕ НАСТРОЙКИ
+   ======================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --scale: 1;          /* Масштаб под разрешение экрана */
+    --panel-alpha: 0.27; /* Прозрачность плашек */
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Merriweather', serif, sans-serif;
+    background-color: #1a1a1a;
+    overflow: hidden;
+}
+
+/* =======================================================
+   ЭКРАНЫ И ФОНЫ
+   ======================================================= */
+.screen {
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: none;
+    aspect-ratio: 576 / 323;
+    overflow: hidden; /* Защита от вылезания плашек за края */
+}
+
+.screen.active {
+    display: block;
+}
+
+.screen img, 
+.bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    display: block;
+    z-index: 0;
+}
+
+/* =======================================================
+   ЗАТЕМНЕНИЕ ПРИ ПЕРЕХОДЕ
+   ======================================================= */
+.screen-fade {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: opacity 0.3s ease;
+}
+
+.screen-fade.active {
+    opacity: 1;
+}
+
+/* =======================================================
+   КЛИКАБЕЛЬНЫЕ ЗОНЫ И РЯБЬ
+   ======================================================= */
+.hotspot {
+    position: absolute;
+    background: transparent;
+    border: none;
+    color: transparent;
+    font-size: 0;
+    z-index: 10;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none !important;
+}
+
+.hotspot:focus, 
+.hotspot:focus-visible {
+    outline: none !important;
+}
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35);
+    transform: scale(0);
+    opacity: 0.7;
+    pointer-events: none;
+    animation: ripple-expand 0.5s ease-out forwards;
+}
+
+@keyframes ripple-expand {
+    to {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+/* =======================================================
+   ПЛАШКИ С ТЕКСТОМ (03-task1 и 04-task2)
+   ======================================================= */
+.task-text, 
+.story-text, 
+.answer-text {
+    box-sizing: border-box !important;
+    z-index: 15;
+    position: absolute !important;
+}
+
+/* 03-task1: Верхняя плашка с заданием */
+[id="03-task1"] .task-text {
+    left: 34.72% !important;
+    top: 5% !important; /* Ровно по макету */
+    width: 38.89% !important;
+    height: 6.19% !important;
+    background-color: rgba(230, 230, 230, var(--panel-alpha)) !important;
+    border-radius: calc(8px * var(--scale)) !important;
+    padding-left: calc(46px * var(--scale)) !important;
+    padding-right: calc(4px * var(--scale)) !important;
+    display: flex !important;
+    align-items: center !important;
+    pointer-events: none !important;
+}
+
+[id="03-task1"] .task-text .task-description {
+    margin: 0 !important;
+    font-size: calc(9px * var(--scale)) !important;
+    color: #1E1E1E !important;
+    text-align: left !important;
+}
+
+/* 03-task1: Нижняя плашка со сценарным текстом */
+[id="03-task1"] .story-text {
+    left: 0 !important;
+    top: 82.17% !important;
+    width: 100% !important;
+    height: 12.69% !important;
+    background-color: rgba(189, 227, 255, var(--panel-alpha)) !important;
+    border-radius: calc(16.4px * var(--scale)) !important;
+    padding: calc(16px * var(--scale)) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    pointer-events: none !important;
+}
+
+[id="03-task1"] .story-text .story-content {
+    margin: 0 !important;
+    font-size: calc(9px * var(--scale)) !important;
+    color: #1E1E1E !important;
+    white-space: normal !important;
+}
+
+/* 04-task2: Верхняя плашка со сценарным текстом */
+[id="04-task2"] .story-text {
+    left: 0 !important;
+    top: 48.17% !important;
+    width: 100% !important;
+    height: 28.53% !important;
+    background-color: rgba(228, 204, 255, var(--panel-alpha)) !important;
+    border-radius: calc(8px * var(--scale)) !important;
+    padding: calc(22px * var(--scale)) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    pointer-events: none !important;
+}
+
+[id="04-task2"] .story-text .story-content {
+    margin: 0 !important;
+    font-size: calc(9px * var(--scale)) !important;
+    color: #1E1E1E !important;
+    white-space: normal !important;
+}
+
+/* 04-task2: Три плашки с вариантами ответов */
+.answer-text {
+    top: 78.24% !important;
+    width: 19.44% !important;
+    height: 17.79% !important;
+    background-color: rgba(151, 71, 255, var(--panel-alpha)) !important;
+    border-radius: calc(23.2px * var(--scale)) !important;
+    padding: calc(4px * var(--scale)) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    pointer-events: auto !important; /* Возвращаем клики */
+    cursor: pointer !important;
+    transition: transform 0.1s;
+}
+
+.answer-text:active {
+    transform: scale(0.98); /* Легкий отклик на нажатие */
+}
+
+.answer-text:nth-of-type(2) { left: 11.11% !important; }
+.answer-text:nth-of-type(3) { left: 38.89% !important; }
+.answer-text:nth-of-type(1) { left: 66.67% !important; }
+
+.answer-text .answer-content {
+    margin: 0 !important;
+    font-size: calc(9px * var(--scale)) !important;
+    color: #D8D8D8 !important;
+    white-space: normal !important;
+}
+
+/* =======================================================
+   НАСТРОЙКИ: ПОЛЗУНКИ
+   ======================================================= */
+.slider {
+    position: absolute;
+    background: transparent;
+    border: none;
+    outline: none;
+    height: 22px;
+    z-index: 10;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer;
+}
+
+.slider::-webkit-slider-runnable-track {
+    background: transparent;
+    height: 22px;
+}
+
+.slider::-moz-range-track {
+    background: transparent;
+    height: 22px;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 10px;
+    height: 22px;
+    border-radius: 50%;
+    background: #BDE3FF;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 10px;
+    height: 22px;
+    border: none;
+    border-radius: 50%;
+    background: #BDE3FF;
+    cursor: pointer;
+}
+
+/* Жесткие координаты для всех 4 ползунков */
+.slider:nth-of-type(1) { left: 43.58%; width: 27.95%; top: calc(22.29% - 11px); }
+.slider:nth-of-type(2) { left: 43.58%; width: 27.95%; top: calc(27.40% - 11px); }
+.slider:nth-of-type(3) { left: 43.58%; width: 27.95%; top: calc(32.51% - 11px); }
+.slider:nth-of-type(4) { left: 43.58%; width: 27.95%; top: calc(47.52% - 11px); }
+
+/* =======================================================
+   НАСТРОЙКИ: ВЫПАДАЮЩИЕ СПИСКИ
+   ======================================================= */
+.dropdown {
+    position: absolute;
+    z-index: 20;
+}
+
+.dropdown.open {
+    z-index: 1000;
+}
+
+/* Жесткие координаты для списков */
+.dropdown:nth-of-type(1) { left: 43.58% !important; top: 55.71% !important; width: 22.22% !important; height: 4.64% !important; }
+.dropdown:nth-of-type(2) { left: 43.58% !important; top: 60.36% !important; width: 22.22% !important; height: 4.64% !important; }
+
+.dropdown-value {
+    color: #E6E6E6;
+    font-family: 'Merriweather', serif;
+    font-size: calc(10px * var(--scale));
+    padding: 0;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    height: 100%;
+}
+
+.dropdown-arrow {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 16px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 30;
+}
+
+.dropdown-menu {
+    z-index: 999;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #141414; /* Сплошной цвет, чтобы не просвечивал текст */
+    border-radius: 4px;
+    padding: 2px 0;
+    margin: 0;
+    list-style: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.8);
+    display: none;
+}
+
+.dropdown.open .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu li {
+    padding: 3px 6px;
+    color: #E6E6E6;
+    font-family: 'Merriweather', serif;
+    font-size: calc(10px * var(--scale));
+    cursor: pointer;
+    text-align: center;
+}
+
+.dropdown-menu li:hover {
+    background: rgba(189, 227, 255, 0.2);
+}
+
+/* =======================================================
+   ПОДСКАЗКИ
+   ======================================================= */
+.hint-popup {
+    position: absolute;
+    left: 82.08%;
+    top: 2.53%;
+    width: 12.5%;
+    height: 9.26%;
+    background: rgba(20, 20, 20, 0.75);
+    border-radius: 6px;
+    padding: 4px 6px;
+    font-family: 'Merriweather', serif;
+    font-size: calc(6px * var(--scale));
+    color: #E6E6E6;
+    box-sizing: border-box;
+    z-index: 200;
+    display: none;
+    line-height: 1.3;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.hint-popup.visible {
+    display: flex;
+}
+
+/* =======================================================
+   АНИМАЦИЯ ПРЕДМЕТОВ (задел на будущее)
+   ======================================================= */
+.item-collecting {
+    transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Подсветка выбранного размера текста */
+.size-btn {
+    border-radius: 8px; /* Скругление, чтобы свечение было овальным */
+    transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.size-btn.active {
+    background: rgba(189, 227, 255, 0.25); /* Полупрозрачный голубой (цвет из дизайна) */
+    box-shadow: 0 0 10px rgba(189, 227, 255, 0.6); /* Легкое свечение */
+}
